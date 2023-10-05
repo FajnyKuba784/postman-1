@@ -14,15 +14,19 @@ async function getData(){
         const div = document.createElement("div")
         const body = document.getElementById("body")
         const button = document.createElement("button")
+        const button1 = document.createElement("button")
+        button1.addEventListener("click", ()=>{ocenzuruj(json[i].id)})
         //button.setAttribute("id",json[i].id)
         div.setAttribute("id",json[i].id)
         button.addEventListener("click", ()=>{
             deleteArticle(json[i].id)})
             button.innerHTML = "DELETE"
             li.innerHTML = json[i].title.rendered
-            body.appendChild(div)
+            button1.innerHTML = "Zmien"
             div.appendChild(li)
             div.appendChild(button)
+            div.appendChild(button1)
+            body.appendChild(div)
             
         }
         const body = document.getElementById("body")
@@ -86,6 +90,29 @@ async function stworz(){
 
     console.log(json)
 
+
+
+}
+
+
+
+async function ocenzuruj(id){
+
+    const data = await fetch(`http://localhost/wordpressn/wp-json/wp/v2/posts/${id}?content=anal`, {
+
+    method: "POST",
+    headers:{
+        Authorization: `Basic ${btoa("FajnyKuba784:Paruwkatoja150")}`
+
+    }
+
+
+    })
+
+    const json =  await data.json()
+
+
+    console.log("zmieniono")
 
 
 }
